@@ -1,3 +1,5 @@
+@import '../../styles/utils/mixins.scss';
+
 .headerContainer {
     display: flex;
     justify-content: space-between;
@@ -19,16 +21,7 @@
             position: relative;
             color: #fff;
             & + a {
-                &::before {
-                    content: '';
-                    position: absolute;
-                    left: -.5rem;
-                    display: block;
-                    height: 100%;
-                    width: 2px;
-                    background-color: var(--primary);
-                    filter: brightness(.8);
-                }
+                @include separator;
             }
         }
     }

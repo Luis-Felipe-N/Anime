@@ -1,3 +1,5 @@
+@import '../../styles/utils/mixins.scss';
+
 .heroContainer {
     display: flex;
     gap: 1rem;
@@ -17,16 +19,42 @@
         color: var(--white);
         h1 {
             font-size: 2.5rem;
+            line-height: 2.5rem;
         }
         
         p {
             max-width: 500px;
-            font-size: .8rem;
-            white-space: nowrap; 
-            overflow: hidden;
-            text-overflow: ellipsis;
-            -webkit-line-clamp: 3;
+            font-size: .9rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;  
+            overflow: hidden; 
+            margin: 1.5rem 0;
+        }
+
+        div {
+            display: flex;
+            gap:1rem;
+            span {
+                position: relative;
+                display: inline-block;
+    
+                & + span {
+                    @include separator;
+                }
+
+                a {
+                    color: var(--primary);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 660px) {
+    .heroContainer {
+        flex-direction: column;
+        &__content {
         }
     }
 }
