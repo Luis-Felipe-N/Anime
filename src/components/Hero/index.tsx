@@ -32,10 +32,6 @@ export function Hero() {
 
         getAnimeHero()
     }, [])
-
-    useEffect(() => {
-        console.log(data)
-    }, [data])
  
     return (
         <section className={styles.heroContainer} style={{backgroundImage:`linear-gradient(180deg, rgba(23,25,35,.6) 0%, rgba(23,25,35,9) 98%), url(${data?.banner_image})`}}>

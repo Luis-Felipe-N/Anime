@@ -11,11 +11,11 @@ interface CardAnimeProps {
 }
 
 export default function CardAnime({anime}: CardAnimeProps) {
-    console.log(anime)
+
     return (
         <div className={styles.cardAnimeContainer}>
             <img src={anime.cover_image} alt={anime.titles?.en} />
-            <h1>{anime.titles.en}</h1>
+            {/* <h1>{anime.titles.en}</h1> */}
         </div>
     )
 }

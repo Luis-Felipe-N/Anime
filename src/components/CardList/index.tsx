@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import CardAnime from '../CardAnime'
 import styles from './styles.module.scss'
 
@@ -12,11 +12,14 @@ interface CardAnimeProps {
     descriptions: {en: string, jp: string, it: string},
     titles: {en: string, jp: string},
     start_date: string,
-    trailer_url: string
+    trailer_url: string,
+    id: number
 }
 
 export function CardList({genre}: CardListProps) {
+    const [ directionX, setDirectionX ] = useState(0)
     const [ data, setData ] = useState<CardAnimeProps[]>()
+    const slideContainer = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         const getAnimeHero = async () => {
@@ -38,17 +41,39 @@ export function CardList({genre}: CardListProps) {
         // https://api.aniapi.com/v1/anime?genres=Pirates
     }, [])
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
+    const handleMoveSectionToLeft = () => {
+        if ( slideContainer.current ) {
+            if ( directionX > 0 ) {
+                const userWidthScreen = window.innerWidth
+                setDirectionX( x => x = x - userWidthScreen)
+                console.log(directionX)
+                slideContainer.current.style.transform = `translateX(-${directionX}px)`
+            }
+        }
+    }
+
+    const handleMoveSectionToRigth = () => {
+        if ( slideContainer.current && data ) {
+            const slideContainerWidth = data.length * 208
+
+            if ( directionX < slideContainerWidth) {
+                const userWidthScreen = window.innerWidth
+                setDirectionX( x => x += userWidthScreen)
+                console.log(directionX)
+                slideContainer.current.style.transform = `translateX(-${directionX}px)`
+            }
+        }
+    }
+
     return (
         <section className={styles.cardListContainer}>
             <h2>{genre}</h2>
+            <button onClick={handleMoveSectionToLeft}>back</button>
             <div className={styles.cardListContainer__wrapper}>
-                <div className={styles.container}>
-                    { data && data.map( (animeC) => <CardAnime anime={animeC} />)}
-                    {/* <CardAnime /> */}
+                <div ref={slideContainer} className={styles.container}>
+                    { data && data.map( (animeC) => <CardAnime key={animeC.id} anime={animeC} />)}
                 </div>
+                <button onClick={handleMoveSectionToRigth}>next</button>
             </div>
         </section>
     )
