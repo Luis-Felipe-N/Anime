@@ -1,0 +1,32 @@
+.heroContainer {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem 5%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    &__card {
+        img {
+            overflow: hidden;
+            border-radius: 5px;
+        }
+    }
+
+    &__content {
+        color: var(--white);
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        p {
+            max-width: 500px;
+            font-size: .8rem;
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;  
+        }
+    }
+}

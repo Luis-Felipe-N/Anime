@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #171923;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary: #E4A15D;
+    --white: rgba(255, 255, 255, 0.83);
+}
+
+a{text-decoration: none;}
+
+h1 {
+    font-size: 2rem;
+}
+h2 {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 1080px) {
+    html {
+        font-size: 93.75%;
+    }
+}
+
+@media (max-width: 720px) {
+    html {
+        font-size: 87.5%;
+    }
+}

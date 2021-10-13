@@ -1,0 +1,35 @@
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 5%;
+
+    border-bottom: 2px solid rgba($color: #000000, $alpha: .2);
+
+    h1 {
+        font-weight: 600;
+        color: var(--primary)
+    }
+
+    nav {
+        display: flex;
+        gap: 1rem;
+
+        a {
+            position: relative;
+            color: #fff;
+            & + a {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: -.5rem;
+                    display: block;
+                    height: 100%;
+                    width: 2px;
+                    background-color: var(--primary);
+                    filter: brightness(.8);
+                }
+            }
+        }
+    }
+}
