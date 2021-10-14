@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { BiRightArrow, BiLeftArrow } from 'react-icons/bi'
 import CardAnime from '../CardAnime'
 import styles from './styles.module.scss'
 
 interface CardListProps {
-    genre: string
+    genre: string,
+    slug: string
 }
 
 interface CardAnimeProps {
@@ -16,7 +18,7 @@ interface CardAnimeProps {
     id: number
 }
 
-export function CardList({genre}: CardListProps) {
+export function CardList({genre, slug}: CardListProps) {
     const [ directionX, setDirectionX ] = useState(0)
     const [ data, setData ] = useState<CardAnimeProps[]>()
     const slideContainer = useRef<HTMLDivElement>(null)
@@ -41,39 +43,44 @@ export function CardList({genre}: CardListProps) {
         // https://api.aniapi.com/v1/anime?genres=Pirates
     }, [])
 
+    useEffect(() => {
+        if ( slideContainer.current) {
+            slideContainer.current.style.transform = `translateX(-${directionX*100}%)`
+        }
+    }, [directionX])
+
     const handleMoveSectionToLeft = () => {
         if ( slideContainer.current ) {
-            if ( directionX > 0 ) {
-                const userWidthScreen = window.innerWidth
-                setDirectionX( x => x = x - userWidthScreen)
-                console.log(directionX)
-                slideContainer.current.style.transform = `translateX(-${directionX}px)`
+            if ( directionX >= 0 ) {
+                
+                setDirectionX( x => x = x - 1)
+
             }
         }
     }
 
     const handleMoveSectionToRigth = () => {
+        console.log('avançando')
         if ( slideContainer.current && data ) {
-            const slideContainerWidth = data.length * 208
-
-            if ( directionX < slideContainerWidth) {
-                const userWidthScreen = window.innerWidth
-                setDirectionX( x => x += userWidthScreen)
-                console.log(directionX)
-                slideContainer.current.style.transform = `translateX(-${directionX}px)`
+            const slideContainerWidth = data.length * 204
+            const userWidthScreen = window.innerWidth
+            console.log(Math.ceil(slideContainerWidth/userWidthScreen))
+            if ( directionX < (Math.ceil(slideContainerWidth/userWidthScreen)+1)) {
+                // directionX ? setDirectionX( x => x += userWidthScreen) : setDirectionX(userWidthScreen)
+                setDirectionX(x=>x = x + 1)
             }
         }
     }
 
     return (
         <section className={styles.cardListContainer}>
-            <h2>{genre}</h2>
-            <button onClick={handleMoveSectionToLeft}>back</button>
+            <h2>{slug}</h2>
             <div className={styles.cardListContainer__wrapper}>
+            <button onClick={handleMoveSectionToLeft}><BiLeftArrow size="2rem"/></button>
                 <div ref={slideContainer} className={styles.container}>
                     { data && data.map( (animeC) => <CardAnime key={animeC.id} anime={animeC} />)}
                 </div>
-                <button onClick={handleMoveSectionToRigth}>next</button>
+            <button className={styles.btnNext} onClick={handleMoveSectionToRigth}><BiRightArrow size="2rem"/></button>
             </div>
         </section>
     )

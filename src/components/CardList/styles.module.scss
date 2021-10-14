@@ -1,25 +1,52 @@
 .cardListContainer {
     position: relative;
+    margin-bottom: 3rem;
 
     h2 {
         color: var(--primary);
         font-size: 1.7rem;
-        // margin-bottom: 1rem;
+        margin-left: 5%;
     }
 
-    button {
-        position: absolute;
-    }
-
+    
     &__wrapper {
         overflow-x: hidden;
         
+        button {
+            position: absolute;
+            z-index: 2;
+            height: 337px;
+            cursor: pointer;
+            bottom: 0;
+            // transform: translateY( -50%);
+            background-color: rgba(0, 0, 0, 0.453);
+            border: 0;
+            color: var(--white);
+            padding: 0 .5rem;
+        }
+        
+        .btnNext {
+            right: 0;
+        }
+
         .container {
             transition: .2s;
             transform: translateX(0);
             margin: 0 5%;
             display: flex;
             // gap: .5rem;
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .cardListContainer {
+        &__wrapper {
+            overflow: auto;
+
+            button {
+                display: none;
+            }
         }
     }
 }

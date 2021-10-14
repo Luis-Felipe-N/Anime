@@ -1,0 +1,16 @@
+.footerContainer{
+    display: grid;
+    place-items: center;
+
+    p {
+        color: var(--primary);
+        font-weight: 500;
+    }
+
+    div {
+        font-size: 2rem;
+        a {
+            color: var(--white);
+        }
+    }
+}
