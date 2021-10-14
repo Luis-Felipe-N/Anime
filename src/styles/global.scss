@@ -12,6 +12,8 @@ body {
 :root {
     --primary: #E4A15D;
     --white: rgba(255, 255, 255, 0.83);
+
+    scroll-behavior: smooth;
 }
 
 a{text-decoration: none;}

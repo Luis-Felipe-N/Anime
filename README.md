@@ -1,1 +1,1 @@
-# Anime# Anime
+<h1 align="center">AnimePedia</h1>

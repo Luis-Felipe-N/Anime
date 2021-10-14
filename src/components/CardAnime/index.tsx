@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router'
 import styles from './styles.module.scss'
 interface CardAnimeProps {
     anime: {
@@ -11,9 +12,10 @@ interface CardAnimeProps {
 }
 
 export default function CardAnime({anime}: CardAnimeProps) {
+    const history = useHistory()
 
     return (
-        <div className={styles.cardAnimeContainer}>
+        <div onClick={() => history.push(`/anime/${anime.titles?.en}`)} className={styles.cardAnimeContainer}>
             <img src={anime.cover_image} alt={anime.titles?.en} />
             {/* <h1>{anime.titles.en}</h1> */}
         </div>

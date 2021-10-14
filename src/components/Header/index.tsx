@@ -8,8 +8,8 @@ export function Header() {
             <Link to="/"><h1>AnimePedia</h1></Link>
             <nav>
                 <Link to="/"><a>Home</a></Link>
-                <Link to="/"><a>Destaques</a></Link>
-                {/* <a href="#">Lançamentos</a> */}
+                <a href="#piratas">Piratas</a>
+                <a href="#guerra">Guerra</a>
             </nav>
         </header>
     )

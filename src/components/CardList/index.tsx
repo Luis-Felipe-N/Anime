@@ -60,20 +60,19 @@ export function CardList({genre, slug}: CardListProps) {
     }
 
     const handleMoveSectionToRigth = () => {
-        console.log('avançando')
+
         if ( slideContainer.current && data ) {
             const slideContainerWidth = data.length * 204
             const userWidthScreen = window.innerWidth
-            console.log(Math.ceil(slideContainerWidth/userWidthScreen))
+
             if ( directionX < (Math.ceil(slideContainerWidth/userWidthScreen)+1)) {
-                // directionX ? setDirectionX( x => x += userWidthScreen) : setDirectionX(userWidthScreen)
                 setDirectionX(x=>x = x + 1)
             }
         }
     }
 
     return (
-        <section className={styles.cardListContainer}>
+        <section id={slug.toLocaleLowerCase()} className={styles.cardListContainer}>
             <h2>{slug}</h2>
             <div className={styles.cardListContainer__wrapper}>
             <button onClick={handleMoveSectionToLeft}><BiLeftArrow size="2rem"/></button>
