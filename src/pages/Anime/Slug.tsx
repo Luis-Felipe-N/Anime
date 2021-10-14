@@ -1,3 +1,4 @@
+import { format } from "date-fns"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router"
 
@@ -12,10 +13,13 @@ interface CardAnimeProps {
     cover_image: string,
     cover_color: string,
     descriptions: {en: string, jp: string, it: string},
-    titles: {en: string, jp: string},
+    titles: {en: string, jp: string, it: string},
+    title: string
     start_date: string,
     trailer_url: string,
-    id: number
+    id: number,
+    episode_duration: number,
+    episodes_count: number
 }
 
 export function Anime() {
@@ -49,6 +53,13 @@ export function Anime() {
         
     }, [slug])
 
+    useEffect(() => {
+        if ( data && !data.title ) {
+            const title = data.titles?.en || data.titles?.it || data.titles?.jp
+            const parsedData = {...data, title}
+            setData( parsedData )
+        }
+    }, [data])
 
 
     return (
@@ -60,18 +71,36 @@ export function Anime() {
                     </section>
                     <section  className={styles.container}>
                         <div style={{border: `2px solid ${data?.cover_color || '#E4A15D'}`}} className={styles.card}>
-                            <img src={data.cover_image} alt="card de anime" />
+                            <img src={data.cover_image} title={data.title} alt={`Imagem do anme ${data.title}`} />
                         </div>
                         <div className={styles.content}>
-                            <h1>{data.titles?.en || data.titles?.jp}</h1>
+                            <h1 title={data.title}>{data.title}</h1>
                             <h3>{data.titles?.jp}</h3>
                         </div>
                     </section>
-                    <section>
-                        <div>
-                            <div></div>
-                            <p>{data.descriptions?.en || data.descriptions?.it}</p>
+                    <section className={styles.info}>
+                        <div className={styles.content}>
+                            <div>
+                                <div>
+                                    <h3>Data de criação: </h3>
+                                    <span>{format(new Date(data.start_date), 'MM/dd/yyyy')}</span>
+                                </div>
+                                <div>
+                                    <h3>Episódios: </h3>
+                                    <span>{data?.episodes_count}</span>
+                                </div>
+                                <div>
+                                    <h3>Duração de episódios: </h3>
+                                    <span>{data?.episode_duration} min</span>
+                                </div>
+                            </div>
+                            
+                            <h3>Descrição em {(data.descriptions?.en && 'inglês') || (data.descriptions?.it && 'italiano') || data.descriptions?.jp && 'Japonês'}:</h3>
+                            <p  dangerouslySetInnerHTML={{__html: data.descriptions.en || data.descriptions.jp || data.descriptions.it}}></p>
                         </div>
+                        { data?.trailer_url && (
+                            <iframe className={styles.iframeYoutube} width="1366"  height="505" src={data.trailer_url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        )}
                     </section>
                 </main>
                 </>

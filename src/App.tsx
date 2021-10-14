@@ -5,7 +5,7 @@ import { Home } from './pages/Home';
 
 import './styles/global.scss'
 import { Anime } from './pages/Anime/Slug';
-import { PageNotFound } from './pages/404';
+import { PageNotFound } from './pages/PageNotFound';
 
 function App() {
   

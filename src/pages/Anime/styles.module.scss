@@ -10,15 +10,18 @@
     
     .container {
         display: flex;
+        align-items: flex-start;
         padding: 0 5%;
 
         .card {
+            flex-shrink: 0;
             transform: translateY(-50%);
             border-radius: 5px;
-            width: 200px !important;
+            width: 200px;
             overflow: hidden;
     
             img {
+                // object-fit: cover;
                 width: 100%;
                 height: 100%;
             }
@@ -27,13 +30,78 @@
         .content {
             padding: 1rem;
             h1 {
-                // max-width: 500px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;  
+                overflow: hidden; 
                 
                 color: var(--white);
                 font-size: 5rem;
                 line-height: 5rem;
             }
         }
+
+    }
+    .info {
+        max-width: 1366px;
+        margin: 0 auto;
+        padding: 0 5%;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        transform: translateY(-10%);
+        
+        .content {
+            p {
+                letter-spacing: 1px;
+            }
+
+            > div {
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+                margin-bottom: 2rem;
+
+                > div {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+
+                    h3 {
+                        position: relative;
+
+                        &::before {
+                            content: '';
+                            display: block;
+                            position: absolute;
+
+                            bottom: 0;
+                            width: 100%;
+                            height: 5px;
+                            background-color: var(--primary);
+                        }
+                    }
+                }
+            }
+        }
+
+        .iframeYoutube {
+            position: relative;
+            max-width: 100%;
+            // padding-bottom: 56.10%;
+            // height: 0;
+            // overflow: hidden;
+        }
+
+        // .iframeYoutube iframe,
+        // .iframeYoutube object,
+        // .iframeYoutube embed {
+        //     position: absolute;
+        //     top: 0;
+        //     left: 0;
+        //     width: 100%;
+        //     height: 100%;
+        // }
     }
 }
 
@@ -50,6 +118,10 @@
                     line-height: 3rem;
                 }
             }
+        }
+
+        .info {
+            transform: translateY(-10%);
         }
     }
 }

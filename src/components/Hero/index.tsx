@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
 import styles from './styles.module.scss'
 
 import { format } from 'date-fns'
@@ -17,7 +18,7 @@ export function Hero() {
 
     useEffect(() => {
         const getAnimeHero = async () => {
-            const response = await fetch(`https://api.aniapi.com/v1/anime/5441`, {
+            const response = await fetch(`https://api.aniapi.com/v1/anime/11`, {
                 method: 'GET',
                 headers: {
                   'Authorization': `Bearer ${process.env.REACT_APP_ANIME_JWT}`,
@@ -41,10 +42,12 @@ export function Hero() {
 
             <div className={styles.heroContainer__content}>
                 <h1>{data?.titles.en || data?.titles.jp}</h1>
-                {data?.descriptions.en && <p dangerouslySetInnerHTML={{__html: data.descriptions.en || data.descriptions.jp || data.descriptions.it}} ></p>}
 
+                {data && <p dangerouslySetInnerHTML={{__html: data.descriptions.en || data.descriptions.jp || data.descriptions.it}} ></p>}
+
+                <Link to={`/anime/${data?.titles.en}`}><a className={styles.heroContainer__content_more}>ver mais</a></Link>
                 <div>{data?.start_date && <span>{format(new Date(data.start_date), 'MM/dd/yyyy')}</span>}
-                {data    && <span><a href={data?.trailer_url} target="_black">Trailer</a></span>}</div>
+                {data?.trailer_url && <span><a href={data.trailer_url} target="_black">Trailer</a></span>}</div>
             </div>
         </section>
     )

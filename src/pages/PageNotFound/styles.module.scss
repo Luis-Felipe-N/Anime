@@ -1,0 +1,7 @@
+.PageNotFoundContainer {
+    display: grid;
+    place-items: center;
+    min-height: calc(100vh - 9.625rem);
+    background-color: #1c1d27;
+    a{color: var(--primary);}
+}

@@ -1,6 +1,8 @@
 .footerContainer{
     display: grid;
     place-items: center;
+    height: 2rem;
+    padding: 1rem 0;
 
     p {
         color: var(--primary);
