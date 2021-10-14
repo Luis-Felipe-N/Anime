@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 
 import './styles/global.scss'
 import { Anime } from './pages/Anime/Slug';
+import { PageNotFound } from './pages/404';
 
 function App() {
   
@@ -13,6 +14,7 @@ function App() {
       <Header/>
       <Route path="/" exact component={ Home } />
       <Route path="/anime/:slug" component={ Anime }/>
+      <Route path="/404" component={ PageNotFound }/>
       <Footer/>
     </BrowserRouter>
   );

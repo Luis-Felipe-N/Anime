@@ -25,7 +25,7 @@ export function CardList({genre, slug}: CardListProps) {
 
     useEffect(() => {
         const getAnimeHero = async () => {
-            const response = await fetch(`https://api.aniapi.com/v1/anime?genres=${genre}`, {
+            const response = await fetch(`https://api.aniapi.com/v1/anime?formats=0&genres=${genre}`, {
                 method: 'GET',
                 headers: {
                   'Authorization': `Bearer ${process.env.REACT_APP_ANIME_JWT}`,

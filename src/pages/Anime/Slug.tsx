@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router"
+import { useHistory, useParams } from "react-router"
 
-import stylses from './styles.module.scss'
+import styles from './styles.module.scss'
 
 type slugParams = {
     slug: string
@@ -10,6 +10,7 @@ type slugParams = {
 interface CardAnimeProps {
     banner_image: string,
     cover_image: string,
+    cover_color: string,
     descriptions: {en: string, jp: string, it: string},
     titles: {en: string, jp: string},
     start_date: string,
@@ -19,6 +20,8 @@ interface CardAnimeProps {
 
 export function Anime() {
     const [ data, setData ] = useState<CardAnimeProps>()
+    
+    const history = useHistory()
     const params = useParams<slugParams>()
     const slug = params.slug
     
@@ -34,7 +37,11 @@ export function Anime() {
             });
 
             const responseJson = await response.json()
-            setData(responseJson.data.documents)
+            try {
+                setData(responseJson.data.documents[0])
+            } catch {
+                if (!data) history.push('/404')
+            }
             console.log(data)
         }
 
@@ -42,13 +49,29 @@ export function Anime() {
         
     }, [slug])
 
+
+
     return (
         <main>
-            { slug && (
+            { slug && data && (
                 <>
                 <main className={styles.animeContainer}>
-                    <section className={styles.animeContainer__banner}>
-                        <div></div>
+                    <section className={styles.hero} style={{backgroundImage:`linear-gradient(180deg, rgba(23,25,35,.6) 0%, rgba(23,25,35,9) 98%), url(${data.banner_image})`}}>
+                    </section>
+                    <section  className={styles.container}>
+                        <div style={{border: `2px solid ${data?.cover_color || '#E4A15D'}`}} className={styles.card}>
+                            <img src={data.cover_image} alt="card de anime" />
+                        </div>
+                        <div className={styles.content}>
+                            <h1>{data.titles?.en || data.titles?.jp}</h1>
+                            <h3>{data.titles?.jp}</h3>
+                        </div>
+                    </section>
+                    <section>
+                        <div>
+                            <div></div>
+                            <p>{data.descriptions?.en || data.descriptions?.it}</p>
+                        </div>
                     </section>
                 </main>
                 </>

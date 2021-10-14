@@ -1,0 +1,55 @@
+.animeContainer {
+    .hero {
+        height: 40vh;
+        padding: 0 5%;
+        background-position: center;
+        background-size: cover;
+        display: flex;
+
+    }
+    
+    .container {
+        display: flex;
+        padding: 0 5%;
+
+        .card {
+            transform: translateY(-50%);
+            border-radius: 5px;
+            width: 200px !important;
+            overflow: hidden;
+    
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .content {
+            padding: 1rem;
+            h1 {
+                // max-width: 500px;
+                
+                color: var(--white);
+                font-size: 5rem;
+                line-height: 5rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .animeContainer {
+        .container {
+            .content {
+                h1 {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 250px;
+                    font-size: 3rem;
+                    line-height: 3rem;
+                }
+            }
+        }
+    }
+}
