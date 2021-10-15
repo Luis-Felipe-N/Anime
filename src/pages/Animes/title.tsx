@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router"
+
 import CardAnime from "../../components/CardAnime"
 import { SkeletonText } from "../../components/Skeleton"
 
