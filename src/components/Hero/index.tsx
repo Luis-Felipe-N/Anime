@@ -47,7 +47,7 @@ export function Hero() {
 
                     {data && <p dangerouslySetInnerHTML={{__html: data.descriptions.en || data.descriptions.jp || data.descriptions.it}} ></p>}
 
-                    <Link to={`/anime/${data?.titles.en}`}><a className={styles.heroContainer__content_more}>Ver mais</a></Link>
+                    <Link to={`/anime/${data?.titles.en}`}><span className={styles.heroContainer__content_more}>Ver mais</span></Link>
 
                     <div>
                         {data?.start_date && <span>{format(new Date(data.start_date), 'MM/dd/yyyy')}</span>}

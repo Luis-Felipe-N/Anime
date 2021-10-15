@@ -46,14 +46,14 @@ export function Anime() {
             try {
                 setData(responseJson.data.documents[0])
             } catch {
-                if (!data) history.push('/404')
+                history.push('/404')
             }
 
         }
 
         getAnimeHero()
         
-    }, [slug])
+    }, [slug, history])
 
     useEffect(() => {
         if ( data && !data.title ) {
