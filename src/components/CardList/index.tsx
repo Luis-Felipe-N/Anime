@@ -41,7 +41,7 @@ export function CardList({genre, slug}: CardListProps) {
         getAnimeHero()
         
         // https://api.aniapi.com/v1/anime?genres=Pirates
-    }, [])
+    }, [genre])
 
     useEffect(() => {
         if ( slideContainer.current) {
