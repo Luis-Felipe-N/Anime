@@ -97,7 +97,7 @@ export function Anime() {
                                 </div>
                             </div>
                             
-                            <h3>Descrição em {(data.descriptions?.en && 'inglês') || (data.descriptions?.it && 'italiano') || data.descriptions?.jp && 'Japonês'}:</h3>
+                            <h3>Descrição em {(data.descriptions?.en && 'inglês') || (data.descriptions?.it && 'italiano') || (data.descriptions?.jp && 'Japonês')}:</h3>
                             <p  dangerouslySetInnerHTML={{__html: data.descriptions.en || data.descriptions.jp || data.descriptions.it}}></p>
                         </div>
                         { data?.trailer_url && (

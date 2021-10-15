@@ -112,12 +112,12 @@
         .container {
             .content {
                 h1 {
-                    white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     max-width: 250px;
                     font-size: 3rem;
                     line-height: 3rem;
+                    -webkit-line-clamp: 3;
                 }
             }
         }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
-import { useHistory, useParams } from "react-router"
 import CardAnime from "../../components/CardAnime"
+import { SkeletonText } from "../../components/Skeleton"
+
+import styles from './styles.module.scss'
 
 type TitleParams = {
     title: string
@@ -22,7 +24,7 @@ interface CardAnimeProps {
 
 
 export function Animes() {
-
+    const [ notFound, setNotFound ] = useState(false)
     const [ data, setData ] = useState<CardAnimeProps[]>()
 
     const params = useParams<TitleParams>()
@@ -30,7 +32,7 @@ export function Animes() {
     
     useEffect(() => {
         const getAnimeHero = async () => {
-            const response = await fetch(`https://api.aniapi.com/v1/anime?title=${title}`, {
+            const response = await fetch(`https://api.aniapi.com/v1/anime?title=${title}&formats=0,1`, {
                 method: 'GET',
                 headers: {
                   'Authorization': `Bearer ${process.env.REACT_APP_ANIME_JWT}`,
@@ -40,26 +42,33 @@ export function Animes() {
             });
 
             const responseJson = await response.json()
-            setData(responseJson.data.documents)
+            if (responseJson.status_code === 404) {
+                setNotFound(true)
+            } else {
+                setData(responseJson.data.documents)
+                setNotFound(false)
+            }
         }
 
         getAnimeHero()
         
     }, [title])   
 
-    if ( data ) {
+
         return (
-            <main>
+            <main className={styles.containerCard}>
+                { !notFound && <h2>Animes encontrados: {data?.length || '0'}</h2>}
+                <div>
                 {
-                    data.map( anime => <CardAnime key={anime.id} anime={anime}/>)
+                    !notFound ? data ? data.map( anime => <CardAnime key={anime.id} anime={anime}/>) : (
+                        <>
+                        <SkeletonText />
+                        <SkeletonText />
+                        <SkeletonText />
+                        </>
+                    ) : <h1>{title} não foi encontrado</h1>
                 }
+                </div>
             </main>
         )
-    } else {
-        return (
-            <main>
-                <h1>{title} não foi encontrado</h1>
-            </main>
-        )
-    }
 }

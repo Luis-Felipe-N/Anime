@@ -1,0 +1,24 @@
+.containerCard {
+    min-height: calc(100vh - 9.7rem );
+    display: grid;
+    place-items: center;
+    width: 100%;
+    
+    > div {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0 5%;
+        gap: 2rem;
+    }
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    h1 {
+        text-align: center;
+        width: 100%;
+    }
+}

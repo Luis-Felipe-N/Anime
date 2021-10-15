@@ -12,10 +12,10 @@ export function Header() {
 
     const handleActiveInput = () => {
         setActiveInput(!activeInput)
-        if ( search ) handleSearch()
     }
 
-    const handleSearch = () => {
+    const handleSearch = (e: any) => {
+        e.preventDefault()
         if ( search ) {
             history.push(`/animes/${search}`)
             setSearch('')
@@ -25,19 +25,19 @@ export function Header() {
     return (
         <header className={styles.headerContainer}>
             <Link to="/"><h1>AnimePedia</h1></Link>
-            <div className={styles.headerContainer__search}>
-                <button 
-                    onClick={handleActiveInput} 
-                    className={styles.icon} >
-                    <CgSearch size="20"/>
-                </button>
+            <form onSubmit={handleSearch} className={styles.headerContainer__search}>
                 <input 
                     className={activeInput ? styles.active : ''} 
                     type="text" placeholder="Pesquisar" 
                     onChange={ ({target}) => setSearch(target.value)} 
                     value={search}
                 />
-            </div>
+                <button 
+                    onClick={handleActiveInput} 
+                    className={styles.icon} >
+                    <CgSearch size="20"/>
+                </button>
+            </form>
         </header>
     )
 }
