@@ -56,10 +56,21 @@
     }
 }
 
+.skeleton {
+    display: grid;
+    grid-template-columns: 233px 1fr;
+    gap: 2rem;
+    width: 100%;
+}
+
 @media (max-width: 660px) {
     .heroContainer {
         flex-direction: column;
         &__content {
         }
+    }
+
+    .skeleton {
+        grid-template-columns: 1fr;
     }
 }

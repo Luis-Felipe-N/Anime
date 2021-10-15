@@ -2,6 +2,8 @@ import { format } from "date-fns"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router"
 
+import { SkeletonText, SkeletonSubtitle, SkeletonTitle, SkeletonImage } from '../../components/Skeleton';
+
 import styles from './styles.module.scss'
 
 type slugParams = {
@@ -46,7 +48,7 @@ export function Anime() {
             } catch {
                 if (!data) history.push('/404')
             }
-            console.log(data)
+
         }
 
         getAnimeHero()
@@ -64,7 +66,7 @@ export function Anime() {
 
     return (
         <main>
-            { slug && data && (
+            { slug && data ? (
                 <>
                 <main className={styles.animeContainer}>
                     <section className={styles.hero} style={{backgroundImage:`linear-gradient(180deg, rgba(23,25,35,.6) 0%, rgba(23,25,35,9) 98%), url(${data.banner_image})`}}>
@@ -104,6 +106,25 @@ export function Anime() {
                     </section>
                 </main>
                 </>
+            ) : (
+                <div className={styles.heroSkeleton}>
+                    <div className={styles.heroSkeleton__hero}>
+                        <SkeletonImage />
+                        <div>
+                            <SkeletonTitle />
+                            <SkeletonSubtitle />
+                        </div>
+                    </div>
+
+                    <div className={styles.heroSkeleton__content}>
+                        <div>
+                            <SkeletonTitle />
+                            <SkeletonSubtitle />
+                        </div>
+                        <SkeletonText />
+                        <SkeletonText />
+                    </div>
+                </div>
             )}
         </main>
     )

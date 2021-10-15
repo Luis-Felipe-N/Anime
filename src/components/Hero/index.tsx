@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from './styles.module.scss'
 
 import { format } from 'date-fns'
+import { SkeletonText, SkeletonTitle, SkeletonImage, SkeletonSubtitle } from '../Skeleton';
 
 interface CardAnimeProps {
     banner_image: string,
@@ -40,15 +41,32 @@ export function Hero() {
                 <img src={data?.cover_image} alt={data?.titles.en || data?.titles.jp} />
             </div>
 
-            <div className={styles.heroContainer__content}>
-                <h1>{data?.titles.en || data?.titles.jp}</h1>
+            { data ? (
+                <div className={styles.heroContainer__content}>
+                    <h1>{data?.titles.en || data?.titles.jp}</h1>
 
-                {data && <p dangerouslySetInnerHTML={{__html: data.descriptions.en || data.descriptions.jp || data.descriptions.it}} ></p>}
+                    {data && <p dangerouslySetInnerHTML={{__html: data.descriptions.en || data.descriptions.jp || data.descriptions.it}} ></p>}
 
-                <Link to={`/anime/${data?.titles.en}`}><a className={styles.heroContainer__content_more}>ver mais</a></Link>
-                <div>{data?.start_date && <span>{format(new Date(data.start_date), 'MM/dd/yyyy')}</span>}
-                {data?.trailer_url && <span><a href={data.trailer_url} target="_black">Trailer</a></span>}</div>
-            </div>
+                    <Link to={`/anime/${data?.titles.en}`}><a className={styles.heroContainer__content_more}>Ver mais</a></Link>
+
+                    <div>
+                        {data?.start_date && <span>{format(new Date(data.start_date), 'MM/dd/yyyy')}</span>}
+                        {data?.trailer_url && <span><a href={data.trailer_url} target="_black">Trailer</a></span>}
+                    </div>
+                </div>
+            ) : (
+                <div className={styles.skeleton}>
+                    <SkeletonImage />
+                    <div className={styles.text}>
+                    <SkeletonTitle />
+                    <SkeletonText/>
+                    <SkeletonSubtitle />
+                    <SkeletonTitle />
+
+                    </div>
+                </div>
+
+            )}
         </section>
     )
 }

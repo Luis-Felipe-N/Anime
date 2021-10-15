@@ -1,0 +1,14 @@
+.cardAnimeContainer {
+    max-width: 200px;
+    margin-left: 8px;
+    cursor: pointer;
+    
+    img {
+        max-width: 200px;
+        height: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+        object-fit: cover;
+        display: block;
+    }
+}
