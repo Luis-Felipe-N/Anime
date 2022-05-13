@@ -65,7 +65,7 @@ The app will be available for access on your browser at http://localhost:3000
 <p align="center" href="https://blog.rocketseat.com.br/author/thiago/">
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/76018201?v=4" width="100px;" alt=""/>
  <br />
- <sub><b>Luis Felipe</b></sub></a> <a href="https://blog.rocketseat.com.br/author/thiago//" title="Rocketseat">🚀</p>
+  <sub><b>Luis Felipe</b></sub></a> <a href="https://luisnunes.me" title="Luis Felipe Nunes de Carvalho">🚀</p>
 
 
 <p align="center" >Feito com ❤️ por Luis Felipe</p>
